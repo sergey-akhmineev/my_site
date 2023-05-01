@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    {% for item in medicine%}
+
+<div class="card">
+    <div class="card-body">
+        <h3 class="card-title">{{item.name}}</h3>
+        <p class="card-text">{{item.description}}</p>
+        <p class="card-price">Цена {{item.price}}</p>
+        <p class="card-text">Дозировка препарата - {{item.dosage}}</p>
+        <p class="card-text">Наличие {{item.availability}}</p>
+        <a href="/medicine-detail/{{item.id}}/" class="btn btn-primary">Перейти к продукту</a>
+    </div>
+</div>
+
+    {% endfor%}
+{% endblock %}

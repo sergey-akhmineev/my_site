@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<ul class="list-group">
+    {% for item in object_list%}
+    <li class="list-group-item">
+        <a href="/medicine-detail/{{item.id}}/">{{item.name}}</a>
+        <span>
+            <a class="btn btn-warning" href="/medicine-update/{{item.id}}/">Обновить</a>
+        </span>
+        <span>
+            <a class="btn btn-danger" href="/medicine-delete/{{item.id}}/">Удалить</a>
+        </span>
+    </li>
+{% endfor%}
+</ul>
+
+<a class="btn btn-primary" href="/medicine-create/">Создать</a>
+
+{% endblock %}
