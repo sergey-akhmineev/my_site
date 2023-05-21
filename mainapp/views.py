@@ -12,27 +12,27 @@ def index_view(request):
     return render(request, 'mainapp/index.html', {'medicine': medicine})
 
 
-class CategoryListView(ListView):
+class MedicineListView(LoginRequiredMixin, ListView):
     model = Medicine
 
 
-class CategoryDetailView(DetailView):
+class MedicineDetailView(DetailView):
     model = Medicine
 
 
-class CategoryCreateView(CreateView):
-    model = Medicine
-    fields = '__all__'
-    success_url = '/medicine-list/'
-
-
-class CategoryUpdateView(UpdateView):
+class MedicineCreateView(LoginRequiredMixin, CreateView):
     model = Medicine
     fields = '__all__'
     success_url = '/medicine-list/'
 
 
-class CategoryDeleteView(UserPassesTestMixin, DeleteView):
+class MedicineUpdateView(LoginRequiredMixin, UpdateView):
+    model = Medicine
+    fields = '__all__'
+    success_url = '/medicine-list/'
+
+
+class MedicineDeleteView(UserPassesTestMixin, DeleteView):
     model = Medicine
     fields = '__all__'
     success_url = '/medicine-list/'
