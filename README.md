@@ -41,4 +41,4 @@ _______
 - Сергей - [GitHub](https://github.com/sergey-akhmineev) - Почта : ahmineev.serg@yandex.ru, Telegram - https://t.me/JunkRat28
 
 ## Лицензия
-Проект распространяется под лицензией MIT. См. [LICENSE](./LICENSE) файл для подробной информации.
+Проект распространяется под свободной лицензией
