@@ -1,6 +1,5 @@
-from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Type, Subcategory, Medicine, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
@@ -39,5 +38,3 @@ class MedicineDeleteView(UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         return self.request.user.is_superuser
-
-
