@@ -1,0 +1,43 @@
+# Сайт - Аптека
+
+## Зависимости
+
+Для установки зависимостей
+
+```bash
+pip install -r requirements.txt
+```
+
+## Запуск сайт
+
+```bash
+python manage.py migrate
+```
+
+```bash
+python manage.py runserver
+```
+
+## Реализации
+
+# Авторизация
+
+- Авторизация на сайте реализована отдельным приложением userapp
+-
+
+# Тесты
+
+
+________
+
+# Оформление заказов
+
+
+_______
+
+
+## Авторы
+- Сергей - [GitHub](https://github.com/sergey-akhmineev) - Почта : ahmineev.serg@yandex.ru, Telegram - https://t.me/JunkRat28
+
+## Лицензия
+Проект распространяется под лицензией MIT. См. [LICENSE](./LICENSE) файл для подробной информации.
