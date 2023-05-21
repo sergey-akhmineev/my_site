@@ -17,6 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 from mainapp import views
+from django.conf import settings
+from django.conf.urls.static import static
+from userapp.views import RegisterView, LoginView, LogoutView
 
 
 urlpatterns = [
@@ -25,6 +28,12 @@ urlpatterns = [
     path('medicine-list/', views.CategoryListView.as_view()),
     path('medicine-detail/<int:pk>/', views.CategoryDetailView.as_view()),
     path('medicine-update/<int:pk>/', views.CategoryUpdateView.as_view()),
+    path('medicine-delete/<int:pk>/', views.CategoryDeleteView.as_view()),
     path('medicine-create/', views.CategoryCreateView.as_view()),
     path('__debug__/', include('debug_toolbar.urls')),
+    path('register/', RegisterView.as_view()),
+    path('login/', LoginView.as_view()),
+    path('logout/', LogoutView.as_view()),
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

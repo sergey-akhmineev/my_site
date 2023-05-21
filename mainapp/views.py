@@ -1,16 +1,11 @@
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
 from django.shortcuts import render
 from .models import Type, Subcategory, Medicine, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
 
 def index_view(request):
-    # result = get_metrics.delay(url=request.path, method=request.method)
-    # print(result)
-    # print(result.id)
-    # print(type(result))
-    # print(result.status)
-    # print(result.result)
-
     medicine = Medicine.objects.all()
     print(medicine)
 
@@ -35,3 +30,14 @@ class CategoryUpdateView(UpdateView):
     model = Medicine
     fields = '__all__'
     success_url = '/medicine-list/'
+
+
+class CategoryDeleteView(UserPassesTestMixin, DeleteView):
+    model = Medicine
+    fields = '__all__'
+    success_url = '/medicine-list/'
+
+    def test_func(self):
+        return self.request.user.is_superuser
+
+
