@@ -9,7 +9,7 @@
         {% endif %}
         <p class="card-price">Цена {{object.price}}</p>
         <p class="card-text">Дозировка препарата - {{object.dosage}}</p>
-        <p class="card-text">Наличие {{object.availability}}</p>
+        <p class="card-text">Наличие: {% if object.availability %}В наличие{% else %}Нет в наличие{% endif %}</p>
         <p class="card-text">Описание - {{object.description}}</p>
     </div>
 </div>
