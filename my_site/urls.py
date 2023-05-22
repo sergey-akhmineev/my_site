@@ -24,12 +24,12 @@ from userapp.views import RegisterView, LoginView, LogoutView
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.index_view),
-    path('medicine-list/', views.MedicineListView.as_view()),
-    path('medicine-detail/<int:pk>/', views.MedicineDetailView.as_view()),
-    path('medicine-update/<int:pk>/', views.MedicineUpdateView.as_view()),
-    path('medicine-delete/<int:pk>/', views.MedicineDeleteView.as_view()),
-    path('medicine-create/', views.MedicineCreateView.as_view()),
+    path('', views.index_view, name='index_view'),
+    path('medicine-list/', views.MedicineListView.as_view(), name='medicine_list'),
+    path('medicine-detail/<int:pk>/', views.MedicineDetailView.as_view(), name='medicine_detail'),
+    path('medicine-update/<int:pk>/', views.MedicineUpdateView.as_view(), name='medicine_update'),
+    path('medicine-delete/<int:pk>/', views.MedicineDeleteView.as_view(), name='medicine_delete'),
+    path('medicine-create/', views.MedicineCreateView.as_view(), name='medicine_create'),
     path('__debug__/', include('debug_toolbar.urls')),
     path('register/', RegisterView.as_view()),
     path('login/', LoginView.as_view()),

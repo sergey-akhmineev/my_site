@@ -35,8 +35,9 @@ python manage.py runserver
 
 # Тесты
 
-
-________
+```bash
+python manage.py test
+```
 
 # Корзина
 
