@@ -34,6 +34,13 @@ urlpatterns = [
     path('register/', RegisterView.as_view()),
     path('login/', LoginView.as_view()),
     path('logout/', LogoutView.as_view()),
+    path('add-to-cart/<int:medicine_id>/', views.add_to_cart, name='add_to_cart'),
+    path('cart/', views.cart, name='cart'),
+    path('remove-from-cart/<int:order_item_id>/', views.remove_from_cart, name='remove_from_cart'),
+    path('user_profile/', views.user_profile, name='user_profile'),
+    path('checkout_order/', views.checkout_order, name='checkout_order'),
+    path('update_quantity/<int:item_id>/<str:action>/', views.update_quantity, name="update_quantity"),
+    path('search/', views.search, name='search'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

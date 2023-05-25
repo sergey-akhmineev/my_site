@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Личный кабинет</h1>
+    <h3>Логин</h3>
+    <p>{{ user.username }}</p>
+    <h3>Email</h3>
+    <p>{{ user.email }}</p>
+
+    <h3>Заказы</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Номер заказа</th>
+                <th>Название товара</th>
+                <th>Количество</th>
+                <th>Общая цена</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for order_item in order_items %}
+                <tr>
+                    <td>{{ order_item.order.id }}</td>
+                    <td>{{ order_item.medicine.name }}</td>
+                    <td>{{ order_item.quantity }}</td>
+                    <td>{{ order_item.get_total_price }}</td>
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

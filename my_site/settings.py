@@ -40,9 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'widget_tweaks',
-    # others
     'debug_toolbar',
-    # my
     'mainapp',
     'userapp',
 ]

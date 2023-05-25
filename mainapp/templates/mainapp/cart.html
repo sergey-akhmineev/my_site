@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block extra_js %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const quantityButtons = document.querySelectorAll('.quantity-button');
+
+    quantityButtons.forEach(button => {
+      button.addEventListener('click', function(event) {
+        const itemId = button.dataset.id;
+        const action = button.classList.contains('quantity-increase') ? "increase" : "decrease";
+
+        updateQuantity(itemId, action);
+      });
+    });
+  });
+
+  function updateQuantity(itemId, action) {
+    const url = `/update_quantity/${itemId}/${action}/`;
+
+    fetch(url, {
+      headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+      method: 'POST',
+      credentials: 'same-origin',
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.status === 'success') {
+          location.reload();
+        }
+      });
+  }
+</script>
+{% endblock %}
+  <h2>Корзина</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Наименование препарата</th>
+        <th>Количество</th>
+        <th>Цена</th>
+        <th>Общая цена по товарам</th>
+        <th>Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for item in order_items %}
+
+        <tr>
+          <td>{{ item.medicine.name }}</td>
+          <td>
+  <button data-id="{{ item.id }}" class="quantity-button quantity-decrease">-</button>
+  {{ item.quantity }}
+  <button data-id="{{ item.id }}" class="quantity-button quantity-increase">+</button>
+          </td>
+           <li class="list-group-item">
+          <img width="100px" src="{{ item.medicine.img.url }}">
+          </li>
+          <td>{{ item.medicine.price }}</td>
+          <td>{{ item.get_total_price }}</td>
+          <td>
+            <a href="{% url 'remove_from_cart' item.id %}">Удалить</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+
+  </table>
+
+
+
+  <h3>Всего: {{ order.get_total_price }}</h3>
+
+<form action="{% url 'checkout_order' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-primary">Оформить заказ</button>
+  </form>
+
+{% endblock %}

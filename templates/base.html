@@ -27,13 +27,21 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/">Главная</a>
         </li>
+        {% if user.is_superuser %}
         <li class="nav-item">
           <a class="nav-link" href="/medicine-list">Лекарства</a>
         </li>
+        {% endif %}
         {% if user.is_authenticated %}
         <li class="nav-item">
           <a class="nav-link" href="/logout/">Выход</a>
-
+          <li class="nav-item">
+        <a class="nav-link" href="/user_profile/">Личный кабинет</a>
+          <a class="nav-link" href="/cart/">Корзина</a>
+        <li class="nav-item">
+        <form class="d-flex">
+        <button class="btn btn-info">{{user.username}}</button>
+      </form>
           {% else %}
         <li class="nav-item">
           <a class="nav-link" href="/register/">Регистрация</a>
@@ -44,13 +52,11 @@
           {% endif %}
         </li>
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-      <form class="d-flex">
-        <button class="btn btn-info">{{user.username}}</button>
-      </form>
+<form method="GET" action="{% url 'search' %}">
+    <input type="text" name="query" placeholder="Поиск медикаментов">
+    <input type="submit" value="Поиск">
+</for
+
     </div>
   </div>
 </nav>
