@@ -3,26 +3,37 @@
 {% block content %}
 
     {% for item in medicine%}
-
-<div class="card">
-    <div class="card-body">
-        <h3 class="card-title">{{item.name}}</h3>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+  <div class="col">
+    <div class="card h-100">
         {% if item.img %}
-        <img width="400px" src="{{item.img.url}}">
+      <img class="img-fluid" width="320px" src="{{item.img.url}}">
         {% endif %}
-        <p class="card-text"><h3 class="card-title"> Описание </h3> {{item.description}}</p>
-        <p class="card-price">Цена {{item.price}} рублей</p>
-        <p class="card-text">Дозировка препарата - {{item.dosage}}</p>
-        <p class="card-text">Наличие: {% if item.availability %}В наличие{% else %}Нет в наличие{% endif %} </p>
-        <a href="medicine-detail/{{item.id}}/" class="btn btn-primary">Перейти к продукту</a>
-        {% if user.is_authenticated %}
-        {% if item.availability %}
-        <a href="add-to-cart/{{item.id}}/">Добавить в корзину</a>
-        {% endif %}
-        {% endif %}
-
+      <div class="card-body">
+        <h5 class="card-title">{{item.name}}</h5>
+        <p>
+  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+    Описание
+  </button>
+</p>
+<div class="collapse" id="collapseExample">
+  <div class="card card-body">
+    {{item.description}}
+  </div>
     </div>
-</div>
-
+          <p class="card-price">Цена {{item.price}} рублей</p>
+          <p class="card-text">Дозировка препарата - {{item.dosage}} ({{item.dosage_type}})</p>
+          <p class="card-text">Наличие: {% if item.availability %}В наличие{% else %}Нет в наличие{% endif %} </p>
+      </div>
+      <div class="card-footer">
+        <a href="medicine-detail/{{item.id}}/" class="btn btn-primary">Перейти к продукту</a>
+          {% if user.is_authenticated %}
+        {% if item.availability %}
+          <a href="add-to-cart/{{item.id}}/" class="btn btn-primary">Добавить в корзину</a>
+        {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
     {% endfor%}
 {% endblock %}

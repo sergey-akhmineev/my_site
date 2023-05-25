@@ -66,16 +66,11 @@
         </tr>
       {% endfor %}
     </tbody>
-
   </table>
-
-
-
   <h3>Всего: {{ order.get_total_price }}</h3>
-
 <form action="{% url 'checkout_order' %}" method="post">
     {% csrf_token %}
-    <button type="submit" class="btn btn-primary">Оформить заказ</button>
+    <button type="submit" class="btn btn-outline-success">Оформить заказ</button>
   </form>
 
 {% endblock %}

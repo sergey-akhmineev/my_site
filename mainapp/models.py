@@ -8,7 +8,6 @@ warnings.filterwarnings("ignore", category=DeprecationWarning)
 
 class Category(models.Model):
     name = models.CharField(max_length=32, unique=True)
-    img = models.ImageField(upload_to='category', blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -35,6 +34,7 @@ class Medicine(models.Model):
     subcategory = models.ManyToManyField(Subcategory)
     description = models.TextField(blank=True, null=True)
     dosage = models.PositiveIntegerField(null=True, default=0, blank=True)
+    dosage_type = models.CharField(max_length=32, null=True)
     quantity = models.PositiveIntegerField(blank=True, null=True)
     price = models.FloatField()
     availability = models.BooleanField(default=True)

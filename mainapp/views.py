@@ -1,4 +1,5 @@
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin, PermissionRequiredMixin
+from django.contrib import messages
 from django.db.models import Q
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Type, Subcategory, Medicine, Category, Order, OrderItem
@@ -88,6 +89,7 @@ def checkout_order(request):
     if order:
         order.is_paid = True
         order.save()
+        messages.success(request, 'Заказ оформлен!')
     return redirect('user_profile')
 
 
