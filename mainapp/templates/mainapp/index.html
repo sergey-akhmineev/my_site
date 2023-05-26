@@ -2,38 +2,43 @@
 
 {% block content %}
 
-    {% for item in medicine%}
-<div class="row row-cols-1 row-cols-md-3 g-4">
-  <div class="col">
-    <div class="card h-100">
-        {% if item.img %}
-      <img class="img-fluid" width="320px" src="{{item.img.url}}">
-        {% endif %}
-      <div class="card-body">
-        <h5 class="card-title">{{item.name}}</h5>
-        <p>
-  <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-    Описание
-  </button>
-</p>
-<div class="collapse" id="collapseExample">
-  <div class="card card-body">
-    {{item.description}}
-  </div>
+<div class="container">
+    <h1>Список медикаментов</h1>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for item in medicine %}
+        <div class="col">
+            <div class="card h-100">
+                {% if item.img %}
+                <img class="card-img-top" src="{{item.img.url}}" alt="{{item.name}}" style="max-width: 200px; height: auto;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{item.name}}</h5>
+                    <p>
+                        <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{item.id}}" aria-expanded="false" aria-controls="collapse{{item.id}}" onclick="this.innerHTML = (this.innerHTML == 'Описание' ? 'Свернуть' : 'Описание');">
+                            Описание
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapse{{item.id}}">
+                        <div class="card card-body">
+                            {{item.description}}
+                        </div>
+                    </div>
+                    <p class="card-price">Цена {{item.price}} рублей</p>
+                    <p class="card-text">Дозировка препарата - {{item.dosage}} ({{item.dosage_type}})</p>
+                    <p class="card-text">Наличие: {% if item.availability %}В наличие{% else %}Нет в наличие{% endif %} </p>
+                </div>
+                <div class="card-footer">
+                    <a href="{% url 'medicine_detail' item.id %}" class="btn btn-primary">Перейти к продукту</a>
+                    {% if user.is_authenticated %}
+                    {% if item.availability %}
+                    <a href="{% url 'add_to_cart' item.id %}" class="btn btn-primary">Добавить в корзину</a>
+                    {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        {% endfor %}
     </div>
-          <p class="card-price">Цена {{item.price}} рублей</p>
-          <p class="card-text">Дозировка препарата - {{item.dosage}} ({{item.dosage_type}})</p>
-          <p class="card-text">Наличие: {% if item.availability %}В наличие{% else %}Нет в наличие{% endif %} </p>
-      </div>
-      <div class="card-footer">
-        <a href="medicine-detail/{{item.id}}/" class="btn btn-primary">Перейти к продукту</a>
-          {% if user.is_authenticated %}
-        {% if item.availability %}
-          <a href="add-to-cart/{{item.id}}/" class="btn btn-primary">Добавить в корзину</a>
-        {% endif %}
-        {% endif %}
-      </div>
-    </div>
-  </div>
-    {% endfor%}
+</div>
+
 {% endblock %}
