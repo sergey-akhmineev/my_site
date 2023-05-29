@@ -3,15 +3,19 @@
 {% block content %}
 <div class="card">
     <div class="card-body">
-        <h3 class="card-title">{{object.name}}</h3>
+        <h3 class="card-title">{{ object.name }}</h3>
         {% if object.img %}
-        <img width="400px" src="{{object.img.url}}">
+        <img class="img-fluid" style="max-width: 400px;" src="{{ object.img.url }}" alt="{{ object.name }}">
         {% endif %}
-        <p class="card-price">Цена {{object.price}}</p>
-        <p class="card-text">Дозировка препарата - {{object.dosage}}</p>
-        <p class="card-text">Наличие: {% if object.availability %}В наличие{% else %}Нет в наличие{% endif %}</p>
-        <p class="card-text">Описание - {{object.description}}</p>
+        <p class="card-price">Цена: {{ object.price }}</p>
+        <p class="card-text">Дозировка препарата: {{ object.dosage }}</p>
+        <p class="card-text">Наличие: {% if object.availability %}В наличии{% else %}Нет в наличии{% endif %}</p>
+        <p class="card-text">Описание: {{ object.description }}</p>
+        {% if user.is_authenticated %}
+        {% if object.availability %}
+        <a href="{% url 'add_to_cart' object.id %}" class="btn btn-primary">Добавить в корзину</a>
+        {% endif %}
+        {% endif %}
     </div>
 </div>
-
 {% endblock %}

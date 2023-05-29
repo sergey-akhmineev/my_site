@@ -39,6 +39,9 @@ class MedicineDeleteView(UserPassesTestMixin, DeleteView):
     fields = '__all__'
     success_url = '/medicine-list/'
 
+    def test_func(self):
+        return self.request.user.is_superuser
+
 
 def add_to_cart(request, medicine_id):
     medicine = get_object_or_404(Medicine, id=medicine_id)

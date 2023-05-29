@@ -48,7 +48,7 @@
     quantityButtons.forEach(button => {
       button.addEventListener('click', function(event) {
         const itemId = button.dataset.id;
-        const action = button.classList.contains('quantity-increase') ? "increase" : "decrease";
+        const action = button.classList.contains('quantity-increase') ? 'increase' : 'decrease';
 
         updateQuantity(itemId, action);
       });
@@ -56,7 +56,7 @@
   });
 
   function updateQuantity(itemId, action) {
-    const url = /update_quantity/${itemId}/${action}/;
+    const url = `/update_quantity/${itemId}/${action}/`;
 
     fetch(url, {
       headers: { 'X-CSRFToken': '{{ csrf_token }}' },
